@@ -17,10 +17,10 @@ public enum CardsNumGrade {
     TWO(1);
 
     //フィールド
-    private  int num;
+    private  int cardsNumGrade;
 
     //コンストラクタ
-    private CardsNumGrade(int num) {
-        this.num = num;
+    private CardsNumGrade(int cardsNumGrade) {
+        this.cardsNumGrade = cardsNumGrade;
     }
 }
