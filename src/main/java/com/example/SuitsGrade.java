@@ -8,11 +8,11 @@ public enum SuitsGrade {
     CLUB(1);
 
     //フィールド
-    private int suitNumGrade;
+    private final int suitGrade;
 
     //コンストラクタ
-    private SuitsGrade(int suitNumGrade) {
-        this.suitNumGrade = suitNumGrade;
+    private SuitsGrade(int suitGrade) {
+        this.suitGrade = suitGrade;
     }
 
 }
