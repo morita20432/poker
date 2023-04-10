@@ -17,7 +17,7 @@ public enum CardsNumGrade {
     TWO(1);
 
     //フィールド
-    private  int cardsNumGrade;
+    private final int cardsNumGrade;
 
     //コンストラクタ
     private CardsNumGrade(int cardsNumGrade) {
