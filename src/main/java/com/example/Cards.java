@@ -1,5 +1,9 @@
 package com.example;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public enum Cards {
     //定数
     //スペード
@@ -63,10 +67,20 @@ public enum Cards {
     private final int cardsNum;
 
     private final String suit;
-    //コンストラクタ
 
+    //コンストラクタ
     private Cards(int cardsNum, String suit) {
         this.cardsNum = cardsNum;
         this.suit = suit;
     }
+
+    //メソッド
+//    public static Cards[] createCards() {
+//        return Cards.values();
+//    }
+
+    public static List<Cards> createCardsList() {
+        return new ArrayList<>(Arrays.asList(Cards.values()));
+    }
+
 }
