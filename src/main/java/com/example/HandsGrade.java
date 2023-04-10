@@ -1,6 +1,6 @@
 package com.example;
 
-public enum Hands {
+public enum HandsGrade {
     //定数
     ROYALFLUSH(10),
     STRAIGHTFLUSH(9),
@@ -17,14 +17,14 @@ public enum Hands {
     private final int handsGrade;
 
     //コンストラクタ
-    private Hands(int handsGrade) {
+    private HandsGrade(int handsGrade) {
         this.handsGrade = handsGrade;
     }
 
     //メソッド
-//    public String judgeHands(String suits) {
-//        return "a";
-//    }
+    public String judgeHands(String suits) {
+        return "a";
+    }
     }
 
 //handsEnumでコンストラクタに役の強さ、スートの強さ、数字の強さを引数に設定すると、定数で全パターン記載が必要になる。
