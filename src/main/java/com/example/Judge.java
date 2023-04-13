@@ -52,17 +52,16 @@ public class Judge {
         } else {
             return false;
         }
-
     }
 
     /**
      * 役がストレートフラッシュか判定するメソッドです。
      */
     public static boolean straightFlush(List<Cards> handsCardsList) {
-        if (!royalStraightFlush(handsCardsList)) {
-            return flush(handsCardsList) && straight(handsCardsList);
-        } else {
+        if (royalStraightFlush(handsCardsList)) {
             return false;
+        } else {
+            return flush(handsCardsList) && straight(handsCardsList);
         }
     }
 
@@ -93,7 +92,19 @@ public class Judge {
      * 役がフラッシュか判定するメソッドです。
      */
     public static boolean flush(List<Cards> handsCardsList) {
-        // todo ロイヤルストレートフラッシュでないこと、ストレートフラッシュでないことの証明
+        //ロイヤルストレートフラッシュでないこと、ストレートフラッシュ、フルハウスでないことの証明
+        if (royalStraightFlush(handsCardsList)) {
+            return false;
+        }
+
+        if (straightFlush(handsCardsList)) {
+            return false;
+        }
+
+        if (fullHouse(handsCardsList)) {
+            return false;
+        }
+
         List<Integer> suitGradeList = new ArrayList<>();
         for (Cards cards : handsCardsList) {
             suitGradeList.add(cards.getSuitGrade());
