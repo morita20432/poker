@@ -30,7 +30,7 @@ public class Main {
         HandsCards.openHandsCardValues(playersHandsCardsList);
         //カードに1~5の連番を振る
         HandsCards.printSNum(playersHandsCardsList, playerHandsCardsValueList);
-        //todo 5枚のカードのうち、変えたいカードを選択させる
+        //5枚のカードのうち、変えたいカードを選択させる
         System.out.println("手札から交換したいカードの枚数を入力してください。");
         System.out.println("交換しない場合は0と入力してください。");
 
@@ -38,6 +38,7 @@ public class Main {
         int numOfCards = sc.nextInt();
 
         //交換枚数が1枚以上だった場合処理を行う
+        //todo 0枚の時の処理
         if (0 < numOfCards) {
             System.out.println("手札から交換したいカードの番号を入力してください。");
             //numOfCards枚分、交換するカードを削除し新しいカードを山札から追加する処理
@@ -60,10 +61,19 @@ public class Main {
         //確認用
         HandsCards.openHandsCardValues(cpusHandsCardsList);
 
-        // todo プレイヤー,CPU手札の役を確認する
+        //プレイヤー,CPU手札の役を確認する
+        HandsGrade playerHandsGrade = Judge.checkHands(playersHandsCardsList);
+        HandsGrade cpuHandsGrade = Judge.checkHands(cpusHandsCardsList);
 
-        // todo プレイヤー,CPUの手札の役を比較する
+        String player = "プレイヤーの";
+        //プレイヤーの役を公開する
+        Judge.openHandsGrade(playerHandsGrade, player);
 
-        // todo プレイヤーの役の方が強い場合win,弱い場合lose
+        //プレイヤー,CPUの手札の役を比較する
+        Judge.judgeHands(playerHandsGrade, cpuHandsGrade);
+
+        String cpu = "cpuの";
+        //CPUの役を公開する
+        Judge.openHandsGrade(cpuHandsGrade, cpu);
     }
 }
