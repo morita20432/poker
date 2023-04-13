@@ -1,8 +1,9 @@
 package com.example;
 
+/**
+ * 役の強さを用意したenumです。
+ */
 public enum HandsGrade {
-
-
     ROYALFLUSH(10),
     STRAIGHTFLUSH(9),
     FOROFAKIND(8),

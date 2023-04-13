@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * ポーカーを実行するクラスです。
+ */
 public class Main {
     public static void main(String[] args) {
 
@@ -13,17 +16,21 @@ public class Main {
         List<Cards> cardsList = Cards.createCardsList();
 
         //52枚からランダムに5枚選択し、ArrayListに格納する
-        List<Cards> playersHandsCardsList = new ArrayList<>(); //プレイヤーの手札を生成
-        HandsCards.getRandomCards(cardsList, 5, playersHandsCardsList); //cardsListは47枚になる。
+        //プレイヤーの手札を生成
+        List<Cards> playersHandsCardsList = new ArrayList<>();
+        //cardsListは47枚になる。
+        HandsCards.getRandomCards(cardsList, 5, playersHandsCardsList);
 
         System.out.println(playersHandsCardsList); //確認用:プレイヤーの手札
-        System.out.println(cardsList.size());
+        System.out.println(cardsList.size()); //確認用:山札サイズ
         //47枚からランダムに5枚選択し、ArrayListに格納する
-        List<Cards> cpusHandsCardsList = new ArrayList<>(); //cpuの手札を生成
-        HandsCards.getRandomCards(cardsList, 5, cpusHandsCardsList); //cardsListは42枚になる。
+        //cpuの手札を生成
+        List<Cards> cpusHandsCardsList = new ArrayList<>();
+        //cardsListは42枚になる。
+        HandsCards.getRandomCards(cardsList, 5, cpusHandsCardsList);
 
         System.out.println(cpusHandsCardsList); //確認用:CPUの手札
-        System.out.println(cardsList.size());
+        System.out.println(cardsList.size()); //確認用:山札サイズ
 
         //プレイヤーにランダム抽出された5枚のカードを表示させる
         List<List<String>> playerHandsCardsValueList = HandsCards.getHandsCardValues(playersHandsCardsList);
@@ -34,6 +41,7 @@ public class Main {
         System.out.println("手札から交換したいカードの枚数を入力してください。");
         System.out.println("交換しない場合は0と入力してください。");
 
+        //手札の枚数をnumOfCardsで取得
         Scanner sc = new Scanner(System.in);
         int numOfCards = sc.nextInt();
 
@@ -46,8 +54,10 @@ public class Main {
         } else {
             System.out.println(playerHandsCardsValueList);
         }
-        Random rnd = new Random();
+
         List<List<String>> cpuHandsCardsValueList = HandsCards.getHandsCardValues(cpusHandsCardsList);
+
+        Random rnd = new Random();
         int cpuNumOfCards = rnd.nextInt(5) + 1;
         //CPUの手札をランダムな枚数交換する
         HandsCards.cpuChangeCards(cpuNumOfCards, cpuHandsCardsValueList, cpusHandsCardsList, cardsList); // todo handsCardsValueListはcpuのhandsCardsValueListにする

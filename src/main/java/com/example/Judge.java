@@ -3,6 +3,9 @@ package com.example;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 互いの役を判定、公開するクラスです。
+ */
 public class Judge {
 
     /**
@@ -109,6 +112,7 @@ public class Judge {
      * 役がストレートか判定するメソッドです。
      */
     public static boolean straight(List<Cards> handsCardsList) {
+
         return true;
     }
 
