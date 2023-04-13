@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * cardを用意したenumです。
- * */
+ */
 public enum Cards {
 
     /**
@@ -76,16 +76,22 @@ public enum Cards {
 
     /**
      * suit: stringでプレイヤーに表示用のカードに記載された記号＋数字を表す値
-     * cardNum: intでカードの値
-     * cardsNumGrade: カードの強さを1<13で表した値
-     * suitGrade: suitの強さを1<4で表した値
      */
     private final String suit;
 
+    /**
+     * cardNum: intでカードの値
+     */
     private final int cardNum;
 
+    /**
+     * cardsNumGrade: カードの強さを1<13で表した値
+     */
     private final int cardsNumGrade;
 
+    /**
+     * suitGrade: suitの強さを1<4で表した値
+     */
     private final int suitGrade;
 
     private Cards(String suit, int cardNum, int cardsNumGrade, int suitGrade) {
@@ -97,35 +103,35 @@ public enum Cards {
 
     /**
      * 52枚全てのカードを作成するメソッドです。
-     * */
+     */
     public static List<Cards> createCardsList() {
         return new ArrayList<>(Arrays.asList(Cards.values()));
     }
 
     /**
      * suitを取得するメソッドです。
-     * */
+     */
     public String getCard() {
         return suit;
     }
 
     /**
      * cardNumを取得するメソッドです。
-     * */
+     */
     public int getCardNum() {
         return cardNum;
     }
 
     /**
      * cardNumGradeを取得するメソッドです。
-     * */
+     */
     public int getCardNumGrade() {
         return cardsNumGrade;
     }
 
     /**
      * suitGradeを取得するメソッドです。
-     * */
+     */
     public int getSuitGrade() {
         return suitGrade;
     }
