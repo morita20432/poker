@@ -9,6 +9,7 @@ import java.util.List;
  */
 public enum Cards {
 
+    //todo cardNumは削除予定
     /**
      * スペードの1~13のカードです。
      */
