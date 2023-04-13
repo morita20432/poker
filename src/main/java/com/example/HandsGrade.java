@@ -22,4 +22,8 @@ public enum HandsGrade {
     private HandsGrade(int handsGrade) {
         this.handsGrade = handsGrade;
     }
+
+    public int getHandsGrade() {
+        return handsGrade;
+    }
 }
