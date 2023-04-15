@@ -18,7 +18,7 @@ public class Judge {
             return HandsGrade.ROYALFLUSH;
         } else if (straightFlush(handsCardsList)) {
             return HandsGrade.STRAIGHTFLUSH;
-        } else if (forOfAKind(handsCardsList)) {
+        } else if (fourOfAKind(handsCardsList)) {
             return HandsGrade.FOROFAKIND;
         } else if (fullHouse(handsCardsList)) {
             return HandsGrade.FULLHOUSE;
@@ -43,31 +43,24 @@ public class Judge {
     public static boolean royalStraightFlush(List<Cards> handsCardsList) {
         List<Integer> cardNumList = getCardNumList(handsCardsList);
 
-        return cardNumList.get(0) == 10 && straight(handsCardsList) && flush(handsCardsList);
+        return cardNumList.get(0) == 1 && straight(handsCardsList) && flush(handsCardsList);
     }
 
     /**
      * 役がストレートフラッシュか判定するメソッドです。
      */
     public static boolean straightFlush(List<Cards> handsCardsList) {
-        if (royalStraightFlush(handsCardsList)) {
-            return false;
-        } else {
-            return flush(handsCardsList) && straight(handsCardsList);
-        }
+        return flush(handsCardsList) && straight(handsCardsList);
     }
 
     /**
      * 役がフォーカードか判定するメソッドです。
      */
-    public static boolean forOfAKind(List<Cards> handsCardsList) {
+    public static boolean fourOfAKind(List<Cards> handsCardsList) {
         List<Integer> cardNumList = getCardNumList(handsCardsList);
 
-        //todo これだとロジックが機能しないので修正
         for (int i = 0; i < 3; i++) {
-            if (cardNumList.get(i) != cardNumList.get(i + 1)) {
-                return false;
-            } else if (cardNumList.get(i + 1) != cardNumList.get(i + 2)) {
+            if (cardNumList.get(i) != cardNumList.get(i + 1) && cardNumList.get(i + 1) != cardNumList.get(i + 2)) {
                 return false;
             }
         }
@@ -78,6 +71,19 @@ public class Judge {
      * 役がフルハウスか判定するメソッドです。
      */
     public static boolean fullHouse(List<Cards> handsCardsList) {
+        List<Integer> cardNumList = getCardNumList(handsCardsList);
+        for (int i = 0; i < 2; i++) {
+            if (cardNumList.get(i) != cardNumList.get(i + 1) && cardNumList.get(3) != cardNumList.get(4)) {
+                break;
+            }
+        }
+
+        for (int i = 0; i < 2; i++) {
+            if (cardNumList.get(0) != cardNumList.get(1) && cardNumList.get(i + 2) != cardNumList.get(i + 3)) {
+                return false;
+            }
+        }
+
         return true;
     }
 
@@ -103,22 +109,15 @@ public class Judge {
     public static boolean straight(List<Cards> handsCardsList) {
         List<Integer> cardNumList = getCardNumList(handsCardsList);
 
-//        //sort後の最小gradeが1(カードの数字:2)かつ、最大grade13(カードの数字:A)の場合
-//        if (cardNumList.get(0) == 1 && cardNumList.get(4) == 13) {
-//            //ACEのgradeを0に変更
-//            cardNumList.set(4, 0);
-//            //再び昇順でsort
-//            Collections.sort(cardNumList);
-//        }
-
-        //todo if(カードの値=1,10,11,12,13の場合true)
+        //if(カードの値=1,10,11,12,13の場合true)
         if (cardNumList.get(0) == 1 && cardNumList.get(1) == 10 && cardNumList.get(2) == 11 && cardNumList.get(3) == 12 && cardNumList.get(3) == 13) {
             return true;
-        }
-        //それ以外のストレートの組み合わせの場合か検証
-        for (int i = 0; i < 4; i++) {
-            if (cardNumList.get(i) != cardNumList.get(i + 1) - 1) {
-                return false;
+        } else {
+            //それ以外のストレートの組み合わせの場合か検証
+            for (int i = 0; i < 4; i++) {
+                if (cardNumList.get(i) != cardNumList.get(i + 1) - 1) {
+                    return false;
+                }
             }
         }
         return true;
@@ -129,24 +128,18 @@ public class Judge {
      */
     public static boolean threeOfAKind(List<Cards> handsCardsList) {
         List<Integer> cardNumList = getCardNumList(handsCardsList);
-        //todo ロジック見直し
         for (int i = 0; i < 2; i++) {
-            if (cardNumList.get(i) == cardNumList.get(i + 1)) {
-                return true;
-            } else if (cardNumList.get(i + 1) == cardNumList.get(i + 2)) {
-                return true;
-            } else if (cardNumList.get(i + 2) == cardNumList.get(i + 3)) {
-                return true;
+            if (cardNumList.get(i) != cardNumList.get(i + 1) && cardNumList.get(i + 1) != cardNumList.get(i + 2) && cardNumList.get(i + 2) != cardNumList.get(i + 3)) {
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     /**
      * 役がツーペアか判定するメソッドです。
      */
     public static boolean twoPair(List<Cards> handsCardsList) {
-        //todo フォーカード、フルハウス、フラッシュ、スリーカードでないことの証明
         return true;
     }
 
@@ -201,7 +194,7 @@ public class Judge {
     }
 
     /**
-     * 手札のカードの強さをListで返すメソッドです
+     * 手札のカードの数字をListで返すメソッドです
      */
     public static List<Integer> getCardNumList(List<Cards> handsCardsList) {
         List<Integer> cardNumList = new ArrayList<>();
