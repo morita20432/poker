@@ -89,13 +89,25 @@ public class JudgeTest {
 
     @Test
     @DisplayName("フォーカードな手札をフォーカードと判定できる")
-    void fourOfAKind_true() {
+    void fourOfAKind1_true() {
         assertTrue(Judge.fourOfAKind(List.of(
                 Cards.CLUB_TEN,
                 Cards.DIAMOND_TEN,
                 Cards.HEART_TEN,
                 Cards.SPADE_TEN,
                 Cards.CLUB_ACE
+        )));
+    }
+
+    @Test
+    @DisplayName("フォーカードな手札をフォーカードと判定できる")
+    void fourOfAKind2_true() {
+        assertTrue(Judge.fourOfAKind(List.of(
+                Cards.CLUB_TEN,
+                Cards.DIAMOND_TEN,
+                Cards.HEART_TEN,
+                Cards.SPADE_TEN,
+                Cards.CLUB_KING
         )));
     }
 

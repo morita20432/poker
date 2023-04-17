@@ -58,6 +58,13 @@ public class Judge {
      */
     public static boolean fourOfAKind(List<Cards> handsCardsList) {
         List<Integer> cardNumList = getCardNumList(handsCardsList);
+        return (cardNumList.get(0) == cardNumList.get(1) && cardNumList.get(1) == cardNumList.get(2) && cardNumList.get(2) == cardNumList.get(3)) ||
+                (cardNumList.get(1) == cardNumList.get(2) && cardNumList.get(2) == cardNumList.get(3) && cardNumList.get(3) == cardNumList.get(4));
+    }
+
+    //todo これだとダメな原因を考える
+    public static boolean fourOfAKind1(List<Cards> handsCardsList) {
+        List<Integer> cardNumList = getCardNumList(handsCardsList);
 
         for (int i = 0; i < 3; i++) {
             if (cardNumList.get(i) != cardNumList.get(i + 1) && cardNumList.get(i + 1) != cardNumList.get(i + 2)) {
@@ -115,16 +122,6 @@ public class Judge {
     /**
      * 役がスリーカードか判定するメソッドです。
      */
-    public static boolean threeOfAKind1(List<Cards> handsCardsList) {
-        List<Integer> cardNumList = getCardNumList(handsCardsList);
-        for (int i = 0; i < 2; i++) {
-            if (cardNumList.get(i) != cardNumList.get(i + 1) && cardNumList.get(i + 1) != cardNumList.get(i + 2) && cardNumList.get(i + 2) != cardNumList.get(i + 3)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     public static boolean threeOfAKind(List<Cards> handsCardsList) {
         List<Integer> cardNumList = getCardNumList(handsCardsList);
         return (cardNumList.get(0) == cardNumList.get(1) && cardNumList.get(1) == cardNumList.get(2)) ||
