@@ -113,13 +113,25 @@ public class JudgeTest {
 
     @Test
     @DisplayName("フルハウスな手札をフルハウスと判定できる")
-    void fullHouse_true() {
+    void fullHouse1_true() {
         assertTrue(Judge.fullHouse(List.of(
                 Cards.CLUB_TEN,
-                Cards.CLUB_JACK,
-                Cards.CLUB_QUEEN,
-                Cards.CLUB_KING,
-                Cards.CLUB_ACE
+                Cards.DIAMOND_TEN,
+                Cards.HEART_TEN,
+                Cards.CLUB_ACE,
+                Cards.DIAMOND_ACE
+        )));
+    }
+
+    @Test
+    @DisplayName("フルハウスな手札をフルハウスと判定できる")
+    void fullHouse2_true() {
+        assertTrue(Judge.fullHouse(List.of(
+                Cards.CLUB_TEN,
+                Cards.DIAMOND_TEN,
+                Cards.HEART_ACE,
+                Cards.CLUB_ACE,
+                Cards.DIAMOND_ACE
         )));
     }
 
@@ -223,7 +235,7 @@ public class JudgeTest {
 
     @Test
     @DisplayName("スリーカードな手札をスリーカードと判定できる")
-    void threeOfAKind_true() {
+    void threeOfAKind3_true() {
         assertTrue(Judge.threeOfAKind(List.of(
                 Cards.CLUB_TEN,
                 Cards.DIAMOND_NINE,
@@ -247,12 +259,36 @@ public class JudgeTest {
 
     @Test
     @DisplayName("ツーペアな手札をツーペアと判定できる")
-    void twoPair_true() {
+    void twoPair1_true() {
+        assertTrue(Judge.twoPair(List.of(
+                Cards.CLUB_TEN,
+                Cards.DIAMOND_TEN,
+                Cards.CLUB_QUEEN,
+                Cards.SPADE_ACE,
+                Cards.CLUB_ACE
+        )));
+    }
+
+    @Test
+    @DisplayName("ツーペアな手札をツーペアと判定できる")
+    void twoPair2_true() {
+        assertTrue(Judge.twoPair(List.of(
+                Cards.CLUB_TEN,
+                Cards.DIAMOND_TEN,
+                Cards.CLUB_QUEEN,
+                Cards.HEART_QUEEN,
+                Cards.CLUB_ACE
+        )));
+    }
+
+    @Test
+    @DisplayName("ツーペアな手札をツーペアと判定できる")
+    void twoPair3_true() {
         assertTrue(Judge.twoPair(List.of(
                 Cards.CLUB_TEN,
                 Cards.CLUB_JACK,
-                Cards.CLUB_QUEEN,
-                Cards.CLUB_KING,
+                Cards.DIAMOND_JACK,
+                Cards.SPADE_ACE,
                 Cards.CLUB_ACE
         )));
     }
@@ -271,12 +307,48 @@ public class JudgeTest {
 
     @Test
     @DisplayName("ワンペアな手札をワンペアと判定できる")
-    void onePair_true() {
+    void onePair_true1() {
+        assertTrue(Judge.onePair(List.of(
+                Cards.CLUB_TEN,
+                Cards.DIAMOND_TEN,
+                Cards.CLUB_QUEEN,
+                Cards.CLUB_KING,
+                Cards.CLUB_ACE
+        )));
+    }
+
+    @Test
+    @DisplayName("ワンペアな手札をワンペアと判定できる")
+    void onePair_true2() {
+        assertTrue(Judge.onePair(List.of(
+                Cards.CLUB_TEN,
+                Cards.DIAMOND_QUEEN,
+                Cards.CLUB_QUEEN,
+                Cards.CLUB_KING,
+                Cards.CLUB_ACE
+        )));
+    }
+
+    @Test
+    @DisplayName("ワンペアな手札をワンペアと判定できる")
+    void onePair_true3() {
         assertTrue(Judge.onePair(List.of(
                 Cards.CLUB_TEN,
                 Cards.CLUB_JACK,
-                Cards.CLUB_QUEEN,
+                Cards.DIAMOND_KING,
                 Cards.CLUB_KING,
+                Cards.CLUB_ACE
+        )));
+    }
+
+    @Test
+    @DisplayName("ワンペアな手札をワンペアと判定できる")
+    void onePair_true4() {
+        assertTrue(Judge.onePair(List.of(
+                Cards.CLUB_TEN,
+                Cards.DIAMOND_TEN,
+                Cards.CLUB_QUEEN,
+                Cards.SPADE_ACE,
                 Cards.CLUB_ACE
         )));
     }
