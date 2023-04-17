@@ -72,19 +72,8 @@ public class Judge {
      */
     public static boolean fullHouse(List<Cards> handsCardsList) {
         List<Integer> cardNumList = getCardNumList(handsCardsList);
-        for (int i = 0; i < 2; i++) {
-            if (cardNumList.get(i) != cardNumList.get(i + 1) && cardNumList.get(3) != cardNumList.get(4)) {
-                break;
-            }
-        }
-
-        for (int i = 0; i < 2; i++) {
-            if (cardNumList.get(0) != cardNumList.get(1) && cardNumList.get(i + 2) != cardNumList.get(i + 3)) {
-                return false;
-            }
-        }
-
-        return true;
+        return (cardNumList.get(0) == cardNumList.get(1) && cardNumList.get(1) == cardNumList.get(2)) && (cardNumList.get(3) == cardNumList.get(4)) ||
+                (cardNumList.get(0) == cardNumList.get(1)) && (cardNumList.get(2) == cardNumList.get(3) && cardNumList.get(3) == cardNumList.get(4));
     }
 
     /**
@@ -140,15 +129,22 @@ public class Judge {
      * 役がツーペアか判定するメソッドです。
      */
     public static boolean twoPair(List<Cards> handsCardsList) {
-        return true;
+        List<Integer> cardNumList = getCardNumList(handsCardsList);
+        return (cardNumList.get(0) == cardNumList.get(1) && cardNumList.get(2) == cardNumList.get(3)) ||
+                (cardNumList.get(1) == cardNumList.get(2) && cardNumList.get(3) == cardNumList.get(4)) ||
+                (cardNumList.get(0) == cardNumList.get(1) && cardNumList.get(3) == cardNumList.get(4));
     }
 
     /**
      * 役がワンペアか判定するメソッドです。
      */
     public static boolean onePair(List<Cards> handsCardsList) {
+        List<Integer> cardNumList = getCardNumList(handsCardsList);
 
-        return true;
+        return cardNumList.get(0) == cardNumList.get(1) ||
+                cardNumList.get(1) == cardNumList.get(2) ||
+                cardNumList.get(2) == cardNumList.get(3) ||
+                cardNumList.get(3) == cardNumList.get(4);
     }
 
     /**
@@ -188,8 +184,10 @@ public class Judge {
     public static void judgeHands(HandsGrade playerHandsGrade, HandsGrade cpuHandsGrade) {
         if (playerHandsGrade.getHandsGrade() > cpuHandsGrade.getHandsGrade()) {
             System.out.println("プレイヤーの勝利です");
-        } else {
+        } else if (playerHandsGrade.getHandsGrade() < cpuHandsGrade.getHandsGrade()) {
             System.out.println("プレイヤーの敗北です");
+        } else {
+            System.out.println("引き分けです");
         }
     }
 
@@ -206,5 +204,3 @@ public class Judge {
         return cardNumList;
     }
 }
-
-//todo jUnitテスト作成
