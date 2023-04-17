@@ -60,7 +60,7 @@ public class Main {
         Random rnd = new Random();
         int cpuNumOfCards = rnd.nextInt(5) + 1;
         //CPUの手札をランダムな枚数交換する
-        HandsCards.cpuChangeCards(cpuNumOfCards, cpuHandsCardsValueList, cpusHandsCardsList, cardsList); // todo handsCardsValueListはcpuのhandsCardsValueListにする
+        HandsCards.cpuChangeCards(cpuNumOfCards, cpuHandsCardsValueList, cpusHandsCardsList, cardsList);
 
         //CPUの手札に交換した枚数分カードを追加する
         HandsCards.getRandomCards(cardsList, cpuNumOfCards, cpusHandsCardsList);
