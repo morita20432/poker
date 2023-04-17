@@ -99,23 +99,23 @@ public class Judge {
         List<Integer> cardNumList = getCardNumList(handsCardsList);
 
         //if(カードの値=1,10,11,12,13の場合true)
-        if (cardNumList.get(0) == 1 && cardNumList.get(1) == 10 && cardNumList.get(2) == 11 && cardNumList.get(3) == 12 && cardNumList.get(3) == 13) {
+        if (cardNumList.get(0) == 1 && cardNumList.get(1) == 10 && cardNumList.get(2) == 11 && cardNumList.get(3) == 12 && cardNumList.get(4) == 13) {
             return true;
-        } else {
-            //それ以外のストレートの組み合わせの場合か検証
-            for (int i = 0; i < 4; i++) {
-                if (cardNumList.get(i) != cardNumList.get(i + 1) - 1) {
-                    return false;
-                }
+        }
+        //それ以外のストレートの組み合わせの場合か検証
+        for (int i = 0; i < 4; i++) {
+            if (cardNumList.get(i) != cardNumList.get(i + 1) - 1) {
+                return false;
             }
         }
+
         return true;
     }
 
     /**
      * 役がスリーカードか判定するメソッドです。
      */
-    public static boolean threeOfAKind(List<Cards> handsCardsList) {
+    public static boolean threeOfAKind1(List<Cards> handsCardsList) {
         List<Integer> cardNumList = getCardNumList(handsCardsList);
         for (int i = 0; i < 2; i++) {
             if (cardNumList.get(i) != cardNumList.get(i + 1) && cardNumList.get(i + 1) != cardNumList.get(i + 2) && cardNumList.get(i + 2) != cardNumList.get(i + 3)) {
@@ -123,6 +123,14 @@ public class Judge {
             }
         }
         return true;
+    }
+
+    public static boolean threeOfAKind(List<Cards> handsCardsList) {
+        List<Integer> cardNumList = getCardNumList(handsCardsList);
+        return (cardNumList.get(0) == cardNumList.get(1) && cardNumList.get(1) == cardNumList.get(2)) ||
+                (cardNumList.get(1) == cardNumList.get(2) && cardNumList.get(2) == cardNumList.get(3)) ||
+                (cardNumList.get(2) == cardNumList.get(3) && cardNumList.get(3) == cardNumList.get(4));
+
     }
 
     /**

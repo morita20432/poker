@@ -46,7 +46,6 @@ public class Main {
         int numOfCards = sc.nextInt();
 
         //交換枚数が1枚以上だった場合処理を行う
-        //todo 0枚の時の処理
         if (0 < numOfCards) {
             System.out.println("手札から交換したいカードの番号を入力してください。");
             //numOfCards枚分、交換するカードを削除し新しいカードを山札から追加する処理
@@ -57,11 +56,16 @@ public class Main {
 
         List<List<String>> cpuHandsCardsValueList = HandsCards.getHandsCardValues(cpusHandsCardsList);
 
+        System.out.println("確認用" + cpuHandsCardsValueList);
+
         Random rnd = new Random();
         int cpuNumOfCards = rnd.nextInt(5) + 1;
-        //CPUの手札をランダムな枚数交換する
-        HandsCards.cpuChangeCards(cpuNumOfCards, cpuHandsCardsValueList, cpusHandsCardsList, cardsList);
 
+        System.out.println("交換する枚数" + cpuNumOfCards);
+        //CPUの手札をランダムな枚数交換する
+        HandsCards.cpuChangeCards(cpuNumOfCards, cpuHandsCardsValueList, cpusHandsCardsList);
+
+        System.out.println("確認用" + cpusHandsCardsList);
         //CPUの手札に交換した枚数分カードを追加する
         HandsCards.getRandomCards(cardsList, cpuNumOfCards, cpusHandsCardsList);
 
@@ -79,11 +83,11 @@ public class Main {
         //プレイヤーの役を公開する
         Judge.openHandsGrade(playerHandsGrade, player);
 
-        //プレイヤー,CPUの手札の役を比較する
-        Judge.judgeHands(playerHandsGrade, cpuHandsGrade);
-
         String cpu = "cpuの";
         //CPUの役を公開する
         Judge.openHandsGrade(cpuHandsGrade, cpu);
+
+        //プレイヤー,CPUの手札の役を比較する
+        Judge.judgeHands(playerHandsGrade, cpuHandsGrade);
     }
 }

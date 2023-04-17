@@ -72,7 +72,6 @@ public class HandsCards {
      * 手札: handsCardList
      * 交換する枚数: numOfCards
      */
-    // todo 指定されたカードを手札から特定する処理
     public static void choiceRemoveCards(int numOfCards, List<List<String>> handsCardsValueList, List<Cards> playersHandsCardsList, List<Cards> cardsList) {
         //手札を1枚以上交換する際の処理
         Scanner sc = new Scanner(System.in);
@@ -93,19 +92,19 @@ public class HandsCards {
         }
         System.out.println(playersHandsCardsList); //確認用
         // 選択した数ぶん、山札からランダムに選んだカードを追加する
-        HandsCards.getRandomCards(cardsList, numOfCards, playersHandsCardsList); // todo drawCardに選択したカードの枚数を保持した変数を入れる
+        HandsCards.getRandomCards(cardsList, numOfCards, playersHandsCardsList);
         System.out.println(playersHandsCardsList); //確認用
     }
 
     /**
-     * numOfCards枚分、CPUの交換するカードを削除し新しいカードを山札から追加するメソッドです。
+     * numOfCards枚分、CPUの交換するカードを削除するメソッドです。
      * 手札: handsCardList
      * 交換する枚数: numOfCards
      */
-    public static void cpuChangeCards(int cpuNumOfCards, List<List<String>> cpuHandsCardsValueList, List<Cards> cpusHandsCardsList, List<Cards> cardsList) {
+    public static void cpuChangeCards(int cpuNumOfCards, List<List<String>> cpuHandsCardsValueList, List<Cards> cpusHandsCardsList) {
         for (int i = 0; i < cpuNumOfCards; i++) {
             //交換するカードの番号を取得
-            int changeCardNum = i;
+            int changeCardNum = i + 1;
             //handsCardsValueListから、changeCardNumと一致する交換するカードの値を取得するまで繰り返す
             for (int j = 0; j < cpuHandsCardsValueList.size(); j++) {
                 //handsCardsValueListの連番とchangeCardNumが一致した場合の処理

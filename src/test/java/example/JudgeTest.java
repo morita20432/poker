@@ -58,7 +58,7 @@ public class JudgeTest {
                 Cards.CLUB_JACK,
                 Cards.CLUB_QUEEN,
                 Cards.CLUB_KING,
-                Cards.CLUB_ACE
+                Cards.DIAMOND_ACE
         )));
     }
 
@@ -82,7 +82,7 @@ public class JudgeTest {
                 Cards.CLUB_JACK,
                 Cards.CLUB_QUEEN,
                 Cards.CLUB_KING,
-                Cards.CLUB_ACE
+                Cards.DIAMOND_ACE
         )));
     }
 
@@ -180,7 +180,7 @@ public class JudgeTest {
                 Cards.CLUB_JACK,
                 Cards.CLUB_QUEEN,
                 Cards.CLUB_KING,
-                Cards.CLUB_NINE
+                Cards.CLUB_ACE
         )));
     }
 
@@ -250,7 +250,7 @@ public class JudgeTest {
     void threeOfAKind_false() {
         assertFalse(Judge.threeOfAKind(List.of(
                 Cards.CLUB_TEN,
-                Cards.CLUB_JACK,
+                Cards.DIAMOND_TEN,
                 Cards.CLUB_QUEEN,
                 Cards.CLUB_KING,
                 Cards.CLUB_ACE
