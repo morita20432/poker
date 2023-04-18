@@ -88,6 +88,6 @@ public class Main {
         Judge.openHandsGrade(cpuHandsGrade, cpu);
 
         //プレイヤー,CPUの手札の役を比較する
-        Judge.judgeHands(playerHandsGrade, cpuHandsGrade);
+        Judge.judgeHands(playerHandsGrade, cpuHandsGrade, playersHandsCardsList, cpusHandsCardsList);
     }
 }

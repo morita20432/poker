@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Collections;
 
 /**
  * 手札に対して行う処理を用意したクラスです。
@@ -116,6 +117,18 @@ public class HandsCards {
                 }
             }
         }
+    }
 
+    /**
+     * 手札のカードの数字をListで返すメソッドです
+     */
+    public static List<Integer> getCardNumList(List<Cards> handsCardsList) {
+        List<Integer> cardNumList = new ArrayList<>();
+        for (Cards cards : handsCardsList) {
+            cardNumList.add(cards.getCardNum());
+        }
+        //昇順で並び替え
+        Collections.sort(cardNumList);
+        return cardNumList;
     }
 }

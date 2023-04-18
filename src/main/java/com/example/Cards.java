@@ -135,4 +135,5 @@ public enum Cards {
     public int getSuitGrade() {
         return suitGrade;
     }
+
 }

@@ -24,6 +24,9 @@ public enum HandsGrade {
         this.handsGrade = handsGrade;
     }
 
+    /**
+     * handsGradeを取得するメソッドです。
+     */
     public int getHandsGrade() {
         return handsGrade;
     }

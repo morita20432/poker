@@ -1,7 +1,6 @@
 package com.example;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -41,7 +40,7 @@ public class Judge {
      * 役がロイヤルストレートフラッシュか判定するメソッドです。
      */
     public static boolean royalStraightFlush(List<Cards> handsCardsList) {
-        List<Integer> cardNumList = getCardNumList(handsCardsList);
+        List<Integer> cardNumList = HandsCards.getCardNumList(handsCardsList);
 
         return cardNumList.get(0) == 1 && straight(handsCardsList) && flush(handsCardsList);
     }
@@ -57,14 +56,14 @@ public class Judge {
      * 役がフォーカードか判定するメソッドです。
      */
     public static boolean fourOfAKind(List<Cards> handsCardsList) {
-        List<Integer> cardNumList = getCardNumList(handsCardsList);
+        List<Integer> cardNumList = HandsCards.getCardNumList(handsCardsList);
         return (cardNumList.get(0) == cardNumList.get(1) && cardNumList.get(1) == cardNumList.get(2) && cardNumList.get(2) == cardNumList.get(3)) ||
                 (cardNumList.get(1) == cardNumList.get(2) && cardNumList.get(2) == cardNumList.get(3) && cardNumList.get(3) == cardNumList.get(4));
     }
 
     //todo これだとダメな原因を考える
     public static boolean fourOfAKind1(List<Cards> handsCardsList) {
-        List<Integer> cardNumList = getCardNumList(handsCardsList);
+        List<Integer> cardNumList = HandsCards.getCardNumList(handsCardsList);
 
         for (int i = 0; i < 3; i++) {
             if (cardNumList.get(i) != cardNumList.get(i + 1) && cardNumList.get(i + 1) != cardNumList.get(i + 2)) {
@@ -78,7 +77,7 @@ public class Judge {
      * 役がフルハウスか判定するメソッドです。
      */
     public static boolean fullHouse(List<Cards> handsCardsList) {
-        List<Integer> cardNumList = getCardNumList(handsCardsList);
+        List<Integer> cardNumList = HandsCards.getCardNumList(handsCardsList);
         return (cardNumList.get(0) == cardNumList.get(1) && cardNumList.get(1) == cardNumList.get(2)) && (cardNumList.get(3) == cardNumList.get(4)) ||
                 (cardNumList.get(0) == cardNumList.get(1)) && (cardNumList.get(2) == cardNumList.get(3) && cardNumList.get(3) == cardNumList.get(4));
     }
@@ -103,7 +102,7 @@ public class Judge {
      * 役がストレートか判定するメソッドです。
      */
     public static boolean straight(List<Cards> handsCardsList) {
-        List<Integer> cardNumList = getCardNumList(handsCardsList);
+        List<Integer> cardNumList = HandsCards.getCardNumList(handsCardsList);
 
         //if(カードの値=1,10,11,12,13の場合true)
         if (cardNumList.get(0) == 1 && cardNumList.get(1) == 10 && cardNumList.get(2) == 11 && cardNumList.get(3) == 12 && cardNumList.get(4) == 13) {
@@ -123,7 +122,7 @@ public class Judge {
      * 役がスリーカードか判定するメソッドです。
      */
     public static boolean threeOfAKind(List<Cards> handsCardsList) {
-        List<Integer> cardNumList = getCardNumList(handsCardsList);
+        List<Integer> cardNumList = HandsCards.getCardNumList(handsCardsList);
         return (cardNumList.get(0) == cardNumList.get(1) && cardNumList.get(1) == cardNumList.get(2)) ||
                 (cardNumList.get(1) == cardNumList.get(2) && cardNumList.get(2) == cardNumList.get(3)) ||
                 (cardNumList.get(2) == cardNumList.get(3) && cardNumList.get(3) == cardNumList.get(4));
@@ -134,7 +133,7 @@ public class Judge {
      * 役がツーペアか判定するメソッドです。
      */
     public static boolean twoPair(List<Cards> handsCardsList) {
-        List<Integer> cardNumList = getCardNumList(handsCardsList);
+        List<Integer> cardNumList = HandsCards.getCardNumList(handsCardsList);
         return (cardNumList.get(0) == cardNumList.get(1) && cardNumList.get(2) == cardNumList.get(3)) ||
                 (cardNumList.get(1) == cardNumList.get(2) && cardNumList.get(3) == cardNumList.get(4)) ||
                 (cardNumList.get(0) == cardNumList.get(1) && cardNumList.get(3) == cardNumList.get(4));
@@ -144,7 +143,7 @@ public class Judge {
      * 役がワンペアか判定するメソッドです。
      */
     public static boolean onePair(List<Cards> handsCardsList) {
-        List<Integer> cardNumList = getCardNumList(handsCardsList);
+        List<Integer> cardNumList = HandsCards.getCardNumList(handsCardsList);
 
         return cardNumList.get(0) == cardNumList.get(1) ||
                 cardNumList.get(1) == cardNumList.get(2) ||
@@ -186,26 +185,29 @@ public class Judge {
      */
     // todo 引数で手札のスート、カードの強さの値を受け取る必要あり
     //  elseで同じ役の場合、数値比較、スート比較のロジックを書く必要がある
-    public static void judgeHands(HandsGrade playerHandsGrade, HandsGrade cpuHandsGrade) {
+    public static void judgeHands(HandsGrade playerHandsGrade, HandsGrade cpuHandsGrade, List<Cards> playerHandsCardsList, List<Cards> cpuHandsCardsList) {
         if (playerHandsGrade.getHandsGrade() > cpuHandsGrade.getHandsGrade()) {
             System.out.println("プレイヤーの勝利です");
         } else if (playerHandsGrade.getHandsGrade() < cpuHandsGrade.getHandsGrade()) {
             System.out.println("プレイヤーの敗北です");
+        } else if (playerHandsGrade.getHandsGrade() == HandsGrade.ROYALFLUSH.getHandsGrade()) {
+            judgeSuitGrade(playerHandsCardsList, cpuHandsCardsList);
+        } else if (playerHandsGrade.getHandsGrade() == HandsGrade.STRAIGHTFLUSH.getHandsGrade()) {
+            judgeSuitGrade(playerHandsCardsList, cpuHandsCardsList);
+        } else if (playerHandsGrade.getHandsGrade() == HandsGrade.FLUSH.getHandsGrade()) {
+            judgeSuitGrade(playerHandsCardsList, cpuHandsCardsList);
         } else {
             System.out.println("引き分けです");
         }
     }
 
-    /**
-     * 手札のカードの数字をListで返すメソッドです
-     */
-    public static List<Integer> getCardNumList(List<Cards> handsCardsList) {
-        List<Integer> cardNumList = new ArrayList<>();
-        for (Cards cards : handsCardsList) {
-            cardNumList.add(cards.getCardNum());
+    public static void judgeSuitGrade(List<Cards> playerHandsCardsList, List<Cards> cpuHandsCardsList) {
+        if (playerHandsCardsList.get(0).getSuitGrade() > cpuHandsCardsList.get(0).getSuitGrade()) {
+            System.out.println("プレイヤーの勝利です");
+        } else if (playerHandsCardsList.get(0).getSuitGrade() < cpuHandsCardsList.get(0).getSuitGrade()) {
+            System.out.println("CPUの勝利です");
+        } else {
+            System.out.println("引き分けです");
         }
-        //昇順で並び替え
-        Collections.sort(cardNumList);
-        return cardNumList;
     }
 }
